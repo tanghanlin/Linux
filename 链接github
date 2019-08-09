@@ -28,7 +28,7 @@
 	cd /<自己本地仓库的路径>
 	git add 
 	git commit -m ''
-	git remote add origin git@github.com:<创建Github账号的username>/<ABC>.git
+	# git remote add origin git@github.com:<创建Github账号的username>/<ABC>.git
 	git push origin master
 
 	
