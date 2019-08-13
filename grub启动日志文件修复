@@ -1,0 +1,8 @@
+1.在启动时ubuntu按e进入高级选项，在有linux一行最后面加入pci=nomsi pci=noaer pcie_aspm=off
+2.在进入图形界面后
+	sudo gedit /etc/default/grub
+	在一行后加入GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=nomsi pci=noaer pcie_aspm=off"
+3.清除过量日志文件
+	sudo -i
+	echo > /var/log/syslog
+	echo > /var/log/kern.log
