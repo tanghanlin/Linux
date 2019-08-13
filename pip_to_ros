@@ -1,0 +1,6 @@
+如果打不开rqt_graph
+	pip uninstall pydot
+	pip uninstall pyparsing
+	pip install pyparsing==2.2.0 --user
+	pip install pydot
+	
