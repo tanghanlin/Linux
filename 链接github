@@ -2,7 +2,7 @@
 2.ubuntu16.04版本需要安装ssh工具、git工具才能和Github链接
 	sudo apt-get install git ssh    #用apt-get命令下载git和ssh
 3.在ubuntu16.04系统上生成SSH Key.添加到GitHub的SSH and GPG keys设置中
-	ssh -keygen -t rsa -C "<创建Github账号的邮箱>"    # 就是指定 rsa 算法生成密钥，接着连续三个回车键（不需要输入密码），然后就会生成两个文件 id_rsa 和 id_rsa.pub ，而 id_rsa 是密钥，id_rsa.pub 就是公钥，我们需要的是id_rsa.pub公钥，将 id_rsa.pub 公钥配置到GitHub的SSH and GPG keys中就授权成功了
+	ssh-keygen -t rsa -C "<创建Github账号的邮箱>"    # 就是指定 rsa 算法生成密钥，接着连续三个回车键（不需要输入密码），然后就会生成两个文件 id_rsa 和 id_rsa.pub ，而 id_rsa 是密钥，id_rsa.pub 就是公钥，我们需要的是id_rsa.pub公钥，将 id_rsa.pub 公钥配置到GitHub的SSH and GPG keys中就授权成功了
 	ls -a | grep .sh    # 查看自己的.ssh文件夹是否存在
 	cd .ssh    # 进入到.ssh文件夹中
 	ls    # 列出列表
