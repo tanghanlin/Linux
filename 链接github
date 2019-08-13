@@ -33,7 +33,7 @@
 	git add 
 	git commit -m ''
 	# git remote add origin git@github.com:<创建Github账号的username>/<ABC>.git
-	git push origin master　　＃　将本地内容传送到远程仓库
+	git push origin master　　# 将本地内容传送到远程仓库
 	git pull origin master 　　#　将远程更新合并到本地
 
 	
