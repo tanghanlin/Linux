@@ -11,25 +11,29 @@
 5.查看是否配置成功
 	ssh -T git@github.com
 	正常输出:Hi <创建Github账号的username>! You've successfully authenticated, but GitHub does not provide shell access.
-6.新建new repository(远程仓库)
+6.配置git的用户和邮箱
+	git config --global user.name "your name"
+	git config --global user.email "your_email@youremail.com"
+7.新建new repository(远程仓库)
 	Repository name 随便取，但上传时需要保证该仓库是自己的并且，本地仓库和远程仓库名字一样 -- ABC
 	Description 对仓库的描述
 	Public / Private 选择Public,Private要付费
 	点击Create repository创建
-7.下载远程仓库(或自行创建一个本地仓库)
+8.下载远程仓库(或自行创建一个本地仓库)
 	open a new window
 	git clone git@github.com:<创建Github账号的username>/<ABC>.git
-8.提交文件到暂存区
+9.提交文件到暂存区
 	git add <需要提交的文件名字>
-9.将暂存区文件存放到仓库区
+10.将暂存区文件存放到仓库区
 	git commit -m '<可以加该操作的注释>'
-10.上传到远程仓库上
+11.上传到远程仓库上
 	git push origin master
-11.如果已经拥有仓库，且做完上述操作，以后传输文件的命令
+12.如果已经拥有仓库，且做完上述操作，以后传输文件的命令
 	cd /<自己本地仓库的路径>
 	git add 
 	git commit -m ''
 	# git remote add origin git@github.com:<创建Github账号的username>/<ABC>.git
-	git push origin master
+	git push origin master　　＃　将本地内容传送到远程仓库
+	git pull origin master 　　#　将远程更新合并到本地
 
 	
