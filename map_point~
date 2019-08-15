@@ -1,1 +1,25 @@
-firstpoint  {(1.101651,2.579993,0.000000),(0.000000,0.000000,-0.820375,0.571826)}
+	if place == 'kitchen':
+	    kitchen = self.goal_pose("map",[3.157032, -2.244696, 0], [0.0, 0.0, -0.364995, 0.931010])
+            self.go_to_location(kitchen)
+        if place == 'dining room':
+            dining = self.goal_pose("map",[5.750878, 0.503615, 0], [0.0, 0.0, 0.991008, -0.133802])
+            self.go_to_location(dining)
+        if place == 'living room':
+            dining = self.goal_pose("map",[1.334294,1.615925,0.000000], [0.0, 0.0, -0.835657,0.549252])
+            self.go_to_location(dining)
+        if place == 'bedroom':
+            bedroom = self.goal_pose("map",[13.786670,-9.499260,0.000000],[0.000000,0.000000,0.682282,0.731089])
+            self.go_to_location(bedroom)
+        if place == 'back':
+            back = self.goal_pose("map",[14.728757,-6.904418,0.000000],[0.000000,0.000000,0.499596,0.866258])
+            self.go_to_location(back)
+        if place == 'backforward':
+            backforward = self.goal_pose("map",[0, 0, 0], [0.0, 0.0, 0.154482, 0.987996])
+            self.go_to_location(backforward)
+        if place == 'door':
+            door = self.goal_pose("map",[14.789173,-4.737815,0.000000],[0.000000,0.000000,-0.974374,-0.224936])
+            self.go_to_location(door)
+            self.soundhandle.say("I have get in.")
+        if place == 'zhongjiandian':
+            middle = self.goal_pose("map",[-0.036993,0.550502,0.000000],[0.000000,0.000000,-0.704834,-0.709373])
+            self.go_to_location(middle)
