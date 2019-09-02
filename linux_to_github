@@ -1,8 +1,8 @@
-1.创建Github账号，其中需要输入用户名称(username)、邮箱(email)、密码
+1.创建Github账号，其中需要输入用户名称<username>、邮箱<email>、密码
 2.ubuntu16.04版本需要安装ssh工具、git工具才能和Github链接
 	sudo apt-get install git ssh    #用apt-get命令下载git和ssh
 3.在ubuntu16.04系统上生成SSH Key.添加到GitHub的SSH and GPG keys设置中
-	ssh-keygen -t rsa -C "<email>"    # 就是指定 rsa 算法生成密钥，然后就会生成两个文件 id_rsa 和 id_rsa.pub ，而 id_rsa 是密钥，id_rsa.pub 就是公钥，我们需要的是id_rsa.pub公钥，将 id_rsa.pub 公钥配置到GitHub的SSH and GPG keys中就授权成功了
+	ssh-keygen -t rsa -C "<email>"    # 就是指定 rsa 算法生成密钥，然后就会生成两个文件 id_rsa 和 id_rsa.pub ，而 id_rsa 是密钥，id_rsa.pub 就是公钥，我们需要的是id_rsa.pub公钥
 	接着连续三个回车键（不需要输入任何东西）
 	cd ~
 	ls -a | grep .sh    # 查看自己的.ssh文件夹是否存在
@@ -13,14 +13,14 @@
 5.查看是否配置成功
 	ssh -T git@github.com
 	第一次会有warning，属于正常现象
-	正常输出:Hi <创建Github账号的username>! You've successfully authenticated, but GitHub does not provide shell access.
+	正常输出:Hi <username>! You've successfully authenticated, but GitHub does not provide shell access.
 6.配置git的用户和邮箱
-	git config --global user.name "username"
-	git config --global user.email "your_email@youremail.com"
-7.新建new repository(远程仓库)
-	Repository name 随便取，但上传时需要保证该仓库是自己的并且，本地仓库和远程仓库名字一样 -- ABC
-	Description 对仓库的描述
-	Public / Private 选择Public,Private要付费
+	git config --global user.name "<username>"
+	git config --global user.email "<email>"
+7.github网站新建new repository(远程仓库)
+	Repository name # 随便取，但上传时需要保证该仓库是自己的并且，本地仓库和远程仓库名字一样 -- <repository>
+	Description # 对仓库的描述
+	Public / Private # 选择Public,Private要付费
 	点击Create repository创建
 8.下载远程仓库(或自行创建一个本地仓库)
 	打开新终端
@@ -31,7 +31,7 @@
 	git remote add origin git@github.com:<username>/<repository>.git
 	git push -u origin master
 10.查看自己的传输协议
-	git remote -v # 如果每次都需要输入密码，原因是在添加远程库的时候使用了https的方式。。所以每次都要用https的方式push到远程库
+	git remote -v # 如果每次都需要输入密码，原因是在添加远程库的时候使用了https的方式。所以每次都要用https的方式push到远程库,上述步骤做完，理论上不会出现此情况
 
 ##############################################################上述步骤全部完成，整个仓库就已经搭建好了###################################################################
 11.提交文件到暂存区
