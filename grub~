@@ -8,4 +8,4 @@
 3.清除过量日志文件
 	sudo -i
 	echo > /var/log/syslog
-	echo > /var/log/kern.log
+	echo > /var/log/kern.lo
