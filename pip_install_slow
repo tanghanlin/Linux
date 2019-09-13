@@ -1,7 +1,4 @@
-cd ~/.config/.pip
-如果显示:    没有那个文件或目录
-cd ~/.config/
-mkdir .pip
+cd ~/.pip
 touch pip.conf
 vim pip.conf
 
@@ -10,8 +7,10 @@ vim pip.conf
 
 [global]
 index-url = http://mirrors.aliyun.com/pypi/simple/
+trusted-host = mirrors.aliyun.com
 
 
+# index-url 是为了换到国内的源, trusted-host 是为了信任该源，否则下载时会有提示信息
 其中后面为国内常用的源，这里列出了几个供选择:
 
 
@@ -20,3 +19,5 @@ index-url = http://mirrors.aliyun.com/pypi/simple/
 豆瓣(douban) http://pypi.douban.com/simple/
 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/
 中国科学技术大学 http://pypi.mirrors.ustc.edu.cn/simple/
+
+此方法可以一劳永逸
