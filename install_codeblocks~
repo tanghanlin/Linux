@@ -1,0 +1,6 @@
+1.sudo add-apt-repository ppa:damien-moore/codeblocks-stable
+2.sudo apt-get update
+3.sudo apt-get install codeblocks
+4.(1)系统设置->软件和更新->其他软件,取消勾选http://ppa.launchpad.net/damien-moore/codeblocks-stable/ubuntu trusty main,会提示输入密码,输入密码后点击关闭按钮
+(2)点击关   
+
