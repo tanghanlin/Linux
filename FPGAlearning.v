@@ -25,4 +25,7 @@ module block(a, b, c, d, clk);
 endmodule;
 //  <<为左移符号， >>为右移符号， 与C语言一致
     
+//同一个module中语句为并行执行，但always中，begin与end之间是顺序执行的
+
+
 
