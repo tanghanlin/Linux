@@ -23,5 +23,6 @@ module block(a, b, c, d, clk);
     always@(posedge clk);
         d <= c;
 endmodule;
+//  <<为左移符号， >>为右移符号， 与C语言一致
     
 
