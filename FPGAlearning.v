@@ -28,4 +28,10 @@ endmodule;
 //同一个module中语句为并行执行，但always中，begin与end之间是顺序执行的
 
 
+wait//语句会一直在代码程序中等待，直到满足括号中的条件后，执行其中的语句
 
+assign//只能对wire变量赋值，不可以对reg变量赋值
+
+//在initial语句中，若使用了assign语句后，变量无法普通的进行赋值，只能使用assign语句，或者用deassign语句解除连续赋值状态
+
+assign,force//语句中，可使用force强制连续赋值，当release后，若变量之前被assign连续赋值，则该变量恢复为assign驱动
