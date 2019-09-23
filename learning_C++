@@ -1,0 +1,31 @@
+exm: 
+std::cout << "Enter two numbers:" << std::endl;
+等价
+std::cout << "Enter two numbers:";
+std::cout << std::endl;
+1. << 
+为输出操作符，写入到流
+其中的含义为 <<右边的操作数所产生的值赋给了左边的操作数，且左边的操作数必须是ostream对象
+
+2.endl
+endl成为操纵符，当写入ostream时，具有输出换行的效果，并刷新缓冲区，用户可以看到写入到流中的输出
+endl即表示输出结束，同时有换行的作用，所以如果在输出中不想换行，可以不加endl。
+
+3.count 和 endl 是定义在命名空间std中的
+
+exm: 
+std:: >> v1 >> v2;
+等价
+std::cin >> v1;
+std::cin >> v2;
+
+1. >> 
+为输入操作符，读入流
+其中的含义为 >>左边的操作数所产生的值赋给了右边的操作数，且左边的操作数必须是istream对象，即输入之后赋值给了v1,v2
+
+通过win系统上的crtl + z 或者 linux系统的 crtl + d 可以跳出带输入的while循环，ctrl + z or ctrl + d 为文件结束符。
+
+使用unsigned,double,long(int)在大多数情况下是最优的
+
+看到了page61
+

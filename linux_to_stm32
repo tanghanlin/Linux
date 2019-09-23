@@ -1,0 +1,7 @@
+1.安装JAVA运行环境
+
+sudo apt install openjdk-7-jre
+
+2.安装STM32CubeMX
+
+
