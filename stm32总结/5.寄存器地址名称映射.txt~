@@ -1,0 +1,52 @@
+C语言复习
+为什么用头文件
+    头文件为相关声明提供了一个集中存放的位置。头文件一般包含类的定义、extern 变量的声明和函数的声明
+常用位操作
+    & 按位与
+    | 按位或
+    ^ 按位异或
+    ~ 取反
+    << 左移
+    >> 右移
+
+#include 指示接受以下两种形式:
+	#include <standard_header>
+	#include "my_file.h"
+
+#define宏定义关键字
+    #define 标识符 字符串
+
+#ifdef，#ifndef条件编译
+    #ifndef SALESITEM_H
+    #define SALESITEM_H
+    // Definition of Sales_itemclass and related functions goes here
+    #endif
+
+#extern变量声明
+    表示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他没模块中寻找其定义。对于extern申明变量可以很多次，但定义只有一次
+
+#typedef类型别名
+    typedef 用来定义数据类型,即int double char等等，exm: typedef(means define type)typedef int a，即a可以代替int 作为数据类型使用, a number numbers;(means int number and int numbers)
+
+enum枚举
+enum为枚举,即定义大括号内的变量作为常数。enum books {name=1, money, where, test1, test=3};若没有赋值，则后一个成员的值为前一个值+1，这里依次为1,2,3,4,3
+
+static关键字
+    其申明的局部变量，具有记忆功能
+
+struct 结构体名{
+成员列表1;
+成员列表2;
+...
+}变量名列表;
+在结构体声明的时候可以定义变量，也可以声明之后定义，方法是
+struct 结构体名字 结构体变量列表;
+
+MDK中寄存器地址名称映射
+    外设基地址 外设基地址为其地址
+    AHB1地址 外设基地址+0x00020000
+    GPIOA_BASE AHB1地址+0x0000
+    GPIOA GPIOA_BASE地址+偏移地址
+
+#define GPIOA    ((GPIO_TypeDef *) GPIOA_BASE)
+将GPIO_BASE强制转化成GPIO_TypeDef类型的结构体指针，GPIOA指向GPIOA_BASE的地址，将其之后连续的地址转成结构体类型

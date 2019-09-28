@@ -1,0 +1,22 @@
+STM32F4上的按键开关KEY0 KEY1 KEY2引脚为PE2 | PE3 | PE4
+按键按下后，保持为低电平，因此会设置为上拉输入
+STM32F4上的按键开关WK_UP 引脚为PA0
+按键按下后，保持为高电平，因此会设置为下拉输入
+
+实验到目前的规律:若器件外部接地，则为上拉，若外部接高电平，则为下拉
+
+读取IO口输入电平调用库函数为:
+    uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+读取IO口输入电平操作寄存器为:
+    GPIOx_IDR:端口输入寄存器
+读取IO口输入电平方法:
+    PEin(n)
+
+static 声明变量时，如果多次调用此函数，static变量只在第一次初始化，之后一直保存在静态存储中
+
+在使用时
+#include "key.h"
+u8 变量
+变量 = KEY_Scan(0); //0,1控制按键是否连续
+if (变量==KEY0_PRES)DoSomething(); //KEY0_PRES = 1, KEY1_PRES = 2, KEY2_PRES = 3, WK_UP = 4
+
