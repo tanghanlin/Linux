@@ -1,0 +1,34 @@
+Systick定时器简单，不用浪费一个定时器，节省MCU资源，通常用来延时(写延时函数)或作为实时系统的心跳时钟
+
+Systick为24位的倒计时定时器，在睡眠模式下也能工作
+Systick定时器被捆绑在NVIC中，用于产生SYSTICK异常
+Systick中断的优先级也可以设置
+
+systick四个寄存器
+CTRL SysTick控制和状态寄存器LOAD
+SysTick 自动重装载除值寄存器
+VAL SysTick当前值寄存器CALIB
+SysTick 校准值寄存器
+
+1.Systick控制和状态寄存器-CTRL
+    COLINTFLAG 位段:16 类型:R 复位值:0 描述:如果在上次读取本寄存器后，Systick已经数到了0，则该位为1，如果读取该位，则该位为0
+    CLKSOURCE 位段:2 类型:R/W 复位值:0 描述:1:内核时钟FCLK    0:外部时钟源STCLK
+    TICKINT 位段:1 类型:R/W 复位值:0 描述:1:Systick数到0时产生异常请求    0:无动作
+    ENABLE 位段:0 类型:R/W 复位值:0 描述:Systick定时器的使能位
+    配置函数:SysTick_CLKSourceConfig(); 
+    对于STM32，外部时钟源是HCLK(AHB总线时钟)的1/8；内核时钟是HCLK时钟
+
+2.Systick重装载数值寄存器-LOAD
+    RELOAD 位段: 23:0 类型:R/W 复位值:0 描述:当倒数到0时，将被重装载的值
+
+3.Systick当前值寄存器-VAL
+    CURRENT 位段: 23:0 类型:R/Wc 复位值:0 描述:读取当前倒计时的值，写入则清零
+
+4.Systick校准寄存器
+
+固件库中的Systick相关函数：
+    SysTick_CLKSourceConfig()    //Systick时钟源选择  misc.c文件中
+    SysTick_Config(uint32_t ticks) //初始化systick,时钟为HCLK,并开启中断
+                                   //core_cm3.h/core_cm4.h文件中
+Systick中断服务函数：
+   void SysTick_Handler(void);    //开启中断便要启动中断服务函数

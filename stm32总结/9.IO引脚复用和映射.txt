@@ -1,0 +1,37 @@
+什么是端口复用
+    STM32有很多内置外设，功能外设(串口)，当端口作为内置外设使用时，那么这个端口作为内置外色号使用的时候，就叫做复用
+
+例子:PA9可以作为，USART1_TX等等
+
+每个IO引脚都有一个复用器，该复用器采用16路复用功能输入(AF0到AF15),可通过GPIOx_AFRL(针对引脚0-7),GPIOx_AFRH(针对引脚8-15)寄存器对这些输入进行配置，每四位控制一路复用
+
+1.系统功能
+    将I/O连接到AF0，然后根据所用功能进行配置
+        JTAG/SWD:在各器件复位后，会将这些引脚指定为专用引脚，可供上调试模块立即使用(不受GPIO控制器控制)
+        RTC_REFIN:此引脚应配置位输入浮空模式
+        MCO1和MCO2:这些引脚必须配置位复用功能模式
+2.GPIO
+    在GPIOx_MODER寄存器中将所需I/O配置位输出或输入
+3.外设复用功能
+    对于ADC和DAC，在GPIOx_MODER寄存器中将所需I/O配置为模拟通道
+        在GPIOx_MODER寄存器中将所需I/O配置为复用功能(模拟通道除外)
+        通过选择OTYPER,PUPDR,OSPEEDER寄存器选择端口类型
+        在AFRL | AFRH寄存器中，将I/O连接到所需AFx
+
+
+IO引脚复用设置步骤
+    GPIO端口时钟使能。
+        RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
+
+    复用外设时钟使能。
+        //比如你要将端口PA9,PA10复用为串口，所以要使能串口时钟。
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE); 
+
+    端口模式配置为复用功能。 GPIO_Init（）函数。
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;//复用功能
+
+    配置GPIOx_AFRL或者GPIOx_AFRH寄存器，将IO连接到所需的AFx。
+        /*PA9连接AF7，复用为USART1_TX */
+        GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,GPIO_AF_USART1); 
+        /* PA10连接AF7,复用为USART1_RX*/
+        GPIO_PinAFConfig(GPIOA,GPIO_PinSource10,GPIO_AF_USART1); 

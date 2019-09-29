@@ -1,0 +1,43 @@
+时钟树
+    STM32采取多时钟，根据不同外设提供不同的时钟信号
+STM32有5个时钟源:HSI | HSE | LSI | LSE | PLL
+LSI
+    低速内部时钟 32KHZ 是RC振荡器产生，频率并不是很稳定，主要用于给独立看门狗使用，因为看门狗对频率的要求不是特别严格，还可以作为RTC时钟来源。RTC还可以由HSE提供时钟。(RTC同时可以用LSEOSC作为时钟来源，由于LSEOSC频率更加精准，因此RTC经常用LSEOSC作为时钟来源)
+LSE 低速外部时钟 
+HSE 高速外部时钟
+HSI 可作为系统时钟来源
+任何一个外设在使用之前，必须首先使能其相应的时钟
+频率f/M*N/P就是PLLI2SCLK
+PLL = 8MHZ * N / (N*P) = 8MHZ * 336 / (8*2) = 168MHZ
+MCO1、MCO2引脚，把芯片内部时钟输出到对应芯片引脚PA8,PA9
+    MCO1可输出HSI | LSE | HSE | PLL时钟源
+    MCO2可输出HSE | PLL | SYSCLK | PLLI2SCLK
+MCO最大输出时钟不超过100MHZ
+
+系统时钟可以直接作为以太网PTP时钟
+
+CR寄存器 一般用于配置时钟源的使能 内部高速时钟使能
+PLLCFGR寄存器 配置时钟树中的M,Q,R,N的具体数值
+CFGR寄存器 用来设置AHB1一些分频系数或时钟源的选择
+AHB1 | AHB2 | AHB3寄存器
+
+
+stm32f4xx_rcc.c | stm32f4xx_rcc.h 时钟使能文件
+
+时钟使能配置:
+    RCC_HSICmd, RCC_LSICmd, RCC_PLLCmd, RCC_PLLI2SCmd, RCC_PLLSAICmd, RCC_RTCCLKCmd，RCC_AHBxPeriphClockCmd
+    RCC_APBxPeriphClockCmd
+
+时钟源和时钟相关配置：
+    RCC_HSEConfig, RCC_LSEConfig, RCC_PLLConfig, RCC_PLLI2SConfig, RCC_PLLSAIConfig, RCC_MCO1Config, RCC_MCO2Config, RCC_SYSCLKConfig, RCC_HCLKConfig，RCC_PCLK1Config，RCC_PCLK2Config，RCC_RTCCLKConfig，RCC_I2SCLKConfig
+
+外设复位函数
+    RCC_AHB1PeriphResetCmd，RCC_AHB2PeriphResetCmd，RCC_AHB3PeriphResetCmd，RCC_APB1PeriphResetCmd，RCC_APB2PeriphResetCmd
+
+状态参数获取参数：
+    RCC_GetSYSCLKSource，RCC_GetClocksFreq，RCC_GetFlagStatus，RCC_ClearFlag
+
+RCC中断相关函数 :
+    RCC_ITConfig，RCC_ClearITPendingBit，RCC_GetITStatus
+
+默认系统时钟初始化是在SystemInit里面设置，它是直接操作寄存器来设置的
