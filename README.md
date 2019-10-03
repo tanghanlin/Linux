@@ -1,2 +1,2 @@
 # Linux
-learing the Linux, ROS, Python, C++ and other things
+learing the Linux, ROS, Python, C++, STM32F4 and other things
