@@ -1,0 +1,42 @@
+独立看门狗
+    由于单片机常常会受到外界不可预期的干扰，发生不可预料的后果，因此产生了一种用于检测单片机程序运行状态的模块或芯片，俗称“看门狗”
+    作用:系统跑飞之后，系统复位，系统重新执行
+    STM32内置两个看门狗
+        独立看门狗:(IWDG)由专门的低俗时钟(LSI)驱动，即使主时钟发生故障仍有效，用于对时间精度要求低的场合
+        窗口看门狗:(WWDG)用于精确计时窗口起作用的场合
+
+独立看门狗寄存器
+    键值寄存器(IWDG_KR)倒数计时递减，由Ox_FFF~0x_000会产生一个复位信号(IWDG_RESET)，若在计数到0之前，往KR寄存器写入0x_AAAA，KR寄存器就会重新加载初值计数，从而避免看门狗复位，防止复位(喂狗)，如果程序异常，就无法正常喂狗，从而复位重启系统
+
+    写入0x_AAAA，重载计数
+    写入0x_5555，访问PR,RLR寄存器
+    写入0x_CCCC，启动看门狗工作
+
+    键值寄存器IWDG_KR: 0~15位有效
+    预分频寄存器IWDG_PR：0~2位有效    //具有写保护功能，要操作先取消写保护
+    重装载寄存器IWDG_RLR：0~11位有效    //具有写保护功能，要操作先取消写保护。
+    状态寄存器IWDG_SR：0~1位有效
+
+独立看门狗超时时间
+    溢出时间计算: T = (4 * 2^prer * rlr) / 32
+
+void IWDG_WriteAccessCmd(uint16_t IWDG_WriteAccess);//取消写保护：0x5555使能
+void IWDG_SetPrescaler(uint8_t IWDG_Prescaler);//设置预分频系数：写PR
+void IWDG_SetReload(uint16_t Reload);//设置重装载值：写RLR
+void IWDG_ReloadCounter(void);//喂狗：写0xAAAA到KR
+void IWDG_Enable(void);//使能看门狗：写0xCCCC到KR
+FlagStatus IWDG_GetFlagStatus(uint16_t IWDG_FLAG);//状态：重装载/预分频 更新
+
+独立看门狗配置过程
+    取消寄存器写保护：
+        IWDG_WriteAccessCmd();
+    设置独立看门狗的预分频系数，确定时钟:
+        IWDG_SetPrescaler();
+    设置看门狗重装载值，确定溢出时间:
+        IWDG_SetReload();
+    使能看门狗
+        IWDG_Enable();
+    应用程序喂狗:
+        IWDG_ReloadCounter();
+
+

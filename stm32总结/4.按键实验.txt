@@ -1,4 +1,4 @@
-STM32F4上的按键开关KEY0 KEY1 KEY2引脚为PE2 | PE3 | PE4
+STM32F4上的按键开关KEY0 KEY1 KEY2 WK_UP引脚为PE4 | PE3 | PE2 | PA0
 按键按下后，保持为低电平，因此会设置为上拉输入
 STM32F4上的按键开关WK_UP 引脚为PA0
 按键按下后，保持为高电平，因此会设置为下拉输入

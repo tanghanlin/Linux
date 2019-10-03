@@ -1,0 +1,25 @@
+进行时钟选择
+    实验选择内部时钟(APB1)
+    除非APB1的分频系数为1，否则通用定时器的时钟等于APB1时钟的2倍，如果默认调用系统时钟，那么APB1时钟=42M，CK_INT时钟=84M
+
+向上向下计数模式都会用到TIMx_ARR寄存器，当计数到零时，触发中断
+
+计数器当前值寄存器TIMx_CNT
+预分频寄存器TIMx_PSC
+自动重装载寄存器TIMx_ARR
+控制寄存器TIMx_CR1   决定向上或向下计数
+DMA中断使能寄存器TIMx_DIER
+
+定时器中断实现步骤
+
+TOUT = (ARR + 1)(PSC + 1) / Tclk    //Tclk一般为84M
+使能定时器时钟。
+    RCC_APB1PeriphClockCmd();
+初始化定时器，配置ARR,PSC。
+    TIM_TimeBaseInit();
+开启定时器中断，配置NVIC。
+    NVIC_Init();
+使能定时器。
+    TIM_Cmd();
+编写中断服务函数。
+    TIMx_IRQHandler();

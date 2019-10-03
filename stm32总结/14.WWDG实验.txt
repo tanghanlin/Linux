@@ -1,0 +1,30 @@
+窗口看门狗
+    窗口看门狗为时间time1~time2，即喂狗时间既不能过早也不能过晚，可通过相关寄存器设定上下限时间，设定其上限时间(下限固定)
+    假设重载时间为time1，设置窗口限制时间time2，即当寄存器从time1-0x_3F时，在time1-time2时间段内无法进行喂狗
+
+窗口看门狗超时时间
+    TWWDG = (4096 * 2^WDGTB * (T[5:0] + 1)) / Fpclk1;
+窗口看门狗上窗口值W[4:0]必须大于下窗口值0x_40，否则就无窗口了
+窗口看门狗时钟来源PCLK1(APB1时钟)分频后得来
+
+窗口看门狗寄存器
+    控制寄存器WWDG_CR
+    配置寄存器WWDG_CFR
+    状态寄存器WWDG_SR
+
+窗口看门狗配置过程
+    使能看门狗时钟：
+        RCC_APB1PeriphClockCmd();
+    设置分频系数：
+        WWDG_SetPrescaler();
+    设置上窗口值：
+        WWDG_SetWindowValue();
+    开启提前唤醒中断并分组(可选)：
+        WWDG_EnableIT();   
+        NVIC_Init();
+    使能看门狗：
+        WWDG_Enable();
+    喂狗:
+        WWDG_SetCounter();
+    编写中断服务函数
+        WWDG_IRQHandler();

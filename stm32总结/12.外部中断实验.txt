@@ -1,0 +1,28 @@
+STM32F4的每个IO口都可以作为外部中断输入
+GPIOx_Pin_i 映射到EXTIi，(0~i~15)
+因此例如，EXTI0管理从GPIOA_Pin_0-GPIOI_Pin_0
+对于每个中断线，我们可以配置其触发方式(上升沿，下降沿，边沿触发)以及使能
+IO外部中断在中断向量表中只分配了7个中断向量，也就是只能使用7个中断服务函数
+即只能使用
+    EXTI0_IRQHandler
+    EXTI1_IRQHandler
+    EXTI2_IRQHandler
+    EXTI3_IRQHandler
+    EXTI4_IRQHandler
+    EXTI9_5_IRQHandler
+    EXTI15_10_IRQHandler
+
+
+外部中断常用库函数
+void SYSCFG_EXTILineConfig(uint8_t EXTI_PortSourceGPIOx, uint8_t EXTI_PinSourcex);
+   //设置IO口与中断线的映射关系
+   exp: SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOE, EXTI_PinSource2);//区别M3
+void EXTI_Init(EXTI_InitTypeDef* EXTI_InitStruct);
+ //初始化中断线：触发方式等
+ITStatus EXTI_GetITStatus(uint32_t EXTI_Line);
+//判断中断线中断状态，是否发生
+void EXTI_ClearITPendingBit(uint32_t EXTI_Line);
+//清除中断线上的中断标志位
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);//使能SYSCFG时钟
+//这个函数非常重要，在使用外部中断的时候一定要先使能SYSCFG时钟
+
